@@ -383,6 +383,12 @@ shared_ptr<LocIpcSender> LocIpc::getLocIpcQrtrSender(int service, int instance) 
             "_ZN8loc_util22createLocIpcQrtrSenderEii");
     return (nullptr == creator) ? nullptr : creator(service, instance);
 }
+unique_ptr<LocIpcRecver> LocIpc::getLocIpcQrtrRecver(
+        const shared_ptr<ILocIpcListener>& listener, int service, int instance) {
+    const shared_ptr<LocIpcQrtrWatcher> qrtrWatcher = nullptr;
+    return getLocIpcQrtrRecver(listener, service, instance, qrtrWatcher);
+}
+
 unique_ptr<LocIpcRecver> LocIpc::getLocIpcQrtrRecver(const shared_ptr<ILocIpcListener>& listener,
                                                      int service, int instance,
                                                      const shared_ptr<LocIpcQrtrWatcher>& watcher) {
